@@ -1,0 +1,7 @@
+# file output
+out/
+bin/
+tmp/
+target/
+.settings
+target/
