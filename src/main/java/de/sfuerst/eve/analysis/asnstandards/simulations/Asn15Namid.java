@@ -46,10 +46,12 @@ public class Asn15Namid {
 
 	MassSpectrum spectrum = spectrum188.merge(spectrum243);
 	spectrum = spectrum.merge(spectrum419);
-	MassSpectrum continuous = spectrum.simulateContinuousHighRes(120000, 100);
+        MassSpectrum continuous = spectrum.simulateContinuousHighRes(120000,
+                100, false);
 
 	//          continuous = continuous.roundMasses(3);
-	MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow("ASN-15N-AMID", "ASN-14N-AMID", "", continuous);
+        MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow(
+                "ASN-15N-AMID", "ASN-15N-AMID", "", continuous);
 	demo.pack();
 	demo.setSize(1300, 750);
 	RefineryUtilities.centerFrameOnScreen(demo);

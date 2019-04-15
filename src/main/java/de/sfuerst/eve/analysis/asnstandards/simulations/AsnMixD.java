@@ -120,7 +120,8 @@ public class AsnMixD {
 	spectrum = IsotopePatternSimulator.prepareSpectrum(spectrum, 4, 4, 0.1, IntensityType.RELATIVE);
 
 	//	simulate high res:
-	MassSpectrum continuous = spectrum.simulateContinuousHighRes(120000, 100);
+        MassSpectrum continuous = spectrum.simulateContinuousHighRes(120000,
+                100, false);
 	MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow("ASN-MIX-D", "ASN-MIX-D", "15N + 15N2,13C4 + unlabeled, 1:1:1", continuous);
 	demo.pack();
 	RefineryUtilities.centerFrameOnScreen(demo);

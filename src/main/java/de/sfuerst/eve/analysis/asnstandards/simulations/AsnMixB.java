@@ -43,7 +43,8 @@ public class AsnMixB {
 
 	MassSpectrum spectrum = spectrum188.merge(spectrum243);
 	spectrum = spectrum.merge(spectrum419);
-	MassSpectrum continuous = spectrum.simulateContinuousHighRes(120000, 100);
+        MassSpectrum continuous = spectrum.simulateContinuousHighRes(120000,
+                100, false);
 	
 	MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow("ASN-MIX-B", "ASN-MIX-B", "15N2 13C4 + unlabeled, 1:1", continuous);
 	demo.pack();
