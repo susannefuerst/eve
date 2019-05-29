@@ -2,6 +2,6 @@
 out/
 bin/
 tmp/
-target/
+target
 .settings
-target/
+target/*
