@@ -2,13 +2,14 @@ package de.sfuerst.eve.analysis.simulations.asn;
 
 import java.io.IOException;
 
+import org.jfree.ui.RefineryUtilities;
+
 import de.kempalab.msdps.Fragment;
 import de.kempalab.msdps.FragmentList;
 import de.kempalab.msdps.FragmentsDatabase;
 import de.kempalab.msdps.MassSpectrum;
 import de.kempalab.msdps.constants.FragmentKey;
 import de.kempalab.msdps.constants.IntensityType;
-import de.kempalab.msdps.constants.PathConstants;
 import de.kempalab.msdps.data.IncorporationRate;
 import de.kempalab.msdps.exception.FragmentNotFoundException;
 import de.kempalab.msdps.exception.TypeMismatchException;
@@ -16,6 +17,7 @@ import de.kempalab.msdps.log.MyLogger;
 import de.kempalab.msdps.simulation.IsotopePatternSimulator;
 import de.kempalab.msdps.simulation.IsotopePatternSimulatorRequest;
 import de.kempalab.msdps.simulation.IsotopePatternSimulatorResponse;
+import de.kempalab.msdps.visualisation.MSLineChartApplicationWindow;
 
 public class AsnUnlabeled {
 
@@ -44,19 +46,18 @@ public class AsnUnlabeled {
         MassSpectrum continuous = spectrum.simulateContinuousHighRes(60000,
                 100, false);
 
-        continuous.toDataTable().writeToCsv("N/A", true,
-                PathConstants.FILE_OUTPUT_FOLDER.toAbsolutePath(fragment188
-                        .getFragmentKey().getMetaboliteKey().getAbbreviation()
-                        + "\\asn_unlabeled_243plus2_60k"));
+//    continuous.toDataTable().writeToCsv("N/A", true,
+//            PathConstants.FILE_OUTPUT_FOLDER.toAbsolutePath(fragment188
+//                    .getFragmentKey().getMetaboliteKey().getAbbreviation()
+//                    + "\\asn_unlabeled_243plus2_60k"));
 
-        // continuous = continuous.roundMasses(4);
-        // MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow(
-        // "ASN-UNLABELED", "ASN-UNLABELED", "test merge", continuous,
-        // true);
-        // demo.pack();
-        // demo.setSize(1300, 750);
-        // RefineryUtilities.centerFrameOnScreen(demo);
-        // demo.setVisible(true);
+     MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow(
+     "ASN-UNLABELED", "ASN-UNLABELED", "test merge", continuous,
+     true);
+     demo.pack();
+     demo.setSize(1300, 750);
+     RefineryUtilities.centerFrameOnScreen(demo);
+     demo.setVisible(true);
     }
 
 
