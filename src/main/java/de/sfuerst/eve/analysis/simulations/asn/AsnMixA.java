@@ -1,6 +1,8 @@
-package de.sfuerst.eve.analysis.asnstandards.simulations.asn;
+package de.sfuerst.eve.analysis.simulations.asn;
 
 import java.io.IOException;
+
+import org.jfree.ui.RefineryUtilities;
 
 import de.kempalab.msdps.Fragment;
 import de.kempalab.msdps.FragmentList;
@@ -8,7 +10,6 @@ import de.kempalab.msdps.FragmentsDatabase;
 import de.kempalab.msdps.MassSpectrum;
 import de.kempalab.msdps.constants.FragmentKey;
 import de.kempalab.msdps.constants.IntensityType;
-import de.kempalab.msdps.constants.PathConstants;
 import de.kempalab.msdps.data.IncorporationRate;
 import de.kempalab.msdps.exception.FragmentNotFoundException;
 import de.kempalab.msdps.exception.TypeMismatchException;
@@ -16,18 +17,22 @@ import de.kempalab.msdps.log.MyLogger;
 import de.kempalab.msdps.simulation.IsotopePatternSimulator;
 import de.kempalab.msdps.simulation.IsotopePatternSimulatorRequest;
 import de.kempalab.msdps.simulation.IsotopePatternSimulatorResponse;
+import de.kempalab.msdps.visualisation.MSLineChartApplicationWindow;
 
-public class AsnUnlabeled {
-
-    public static final MyLogger LOGGER = MyLogger.getLogger(AsnUnlabeled.class);
+public class AsnMixA {
+    
+    public static final MyLogger LOGGER = MyLogger.getLogger(AsnMixA.class);
 
     public static void main(String[] args) throws TypeMismatchException, IOException, FragmentNotFoundException {
 	IsotopePatternSimulatorRequest simulatorRequest = new IsotopePatternSimulatorRequest();
 	Fragment fragment188 = FragmentsDatabase.getFragment(FragmentKey.ASN_188);
 	Fragment fragment243 = FragmentsDatabase.getFragment(FragmentKey.ASN_243);
 	Fragment fragment419 = FragmentsDatabase.getFragment(FragmentKey.ASN_419);
+	fragment188.changeCapacity("N");
+	fragment243.changeCapacity("N");
+	fragment419.changeCapacity("N");
 	simulatorRequest.setFragments(new FragmentList(fragment188, fragment243, fragment419));
-	simulatorRequest.setIncorporationRate(new IncorporationRate(0.0));
+	simulatorRequest.setIncorporationRate(new IncorporationRate(0.5));
 	simulatorRequest.setMinimalIntensity(0.1);
 	simulatorRequest.setAnalyzeMassShifts(false);
 	simulatorRequest.setTotalNumberOfFragments(10000.0);
@@ -41,22 +46,15 @@ public class AsnUnlabeled {
 
 	MassSpectrum spectrum = spectrum188.merge(spectrum243);
 	spectrum = spectrum.merge(spectrum419);
-        MassSpectrum continuous = spectrum.simulateContinuousHighRes(60000,
+        MassSpectrum continuous = spectrum.simulateContinuousHighRes(120000,
                 100, false);
 
-        continuous.toDataTable().writeToCsv("N/A", true,
-                PathConstants.FILE_OUTPUT_FOLDER.toAbsolutePath(fragment188
-                        .getFragmentKey().getMetaboliteKey().getAbbreviation()
-                        + "\\asn_unlabeled_243plus2_60k"));
-
-        // continuous = continuous.roundMasses(4);
-        // MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow(
-        // "ASN-UNLABELED", "ASN-UNLABELED", "test merge", continuous,
-        // true);
-        // demo.pack();
-        // demo.setSize(1300, 750);
-        // RefineryUtilities.centerFrameOnScreen(demo);
-        // demo.setVisible(true);
+	//          continuous = continuous.roundMasses(3);
+	MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow("ASN-MIX-A", "ASN-MIX-A", "15N amid + unlabeled, 1:1", continuous, true);
+	demo.pack();
+	demo.setSize(1300, 750);
+	RefineryUtilities.centerFrameOnScreen(demo);
+	demo.setVisible(true);
     }
 
 

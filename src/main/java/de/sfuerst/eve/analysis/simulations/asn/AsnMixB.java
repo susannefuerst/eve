@@ -1,4 +1,4 @@
-package de.sfuerst.eve.analysis.asnstandards.simulations.asn;
+package de.sfuerst.eve.analysis.simulations.asn;
 
 import java.io.IOException;
 
@@ -19,18 +19,15 @@ import de.kempalab.msdps.simulation.IsotopePatternSimulatorRequest;
 import de.kempalab.msdps.simulation.IsotopePatternSimulatorResponse;
 import de.kempalab.msdps.visualisation.MSLineChartApplicationWindow;
 
-public class AsnMixA {
+public class AsnMixB {
     
-    public static final MyLogger LOGGER = MyLogger.getLogger(AsnMixA.class);
+    public static final MyLogger LOGGER = MyLogger.getLogger(AsnMixB.class);
 
     public static void main(String[] args) throws TypeMismatchException, IOException, FragmentNotFoundException {
 	IsotopePatternSimulatorRequest simulatorRequest = new IsotopePatternSimulatorRequest();
 	Fragment fragment188 = FragmentsDatabase.getFragment(FragmentKey.ASN_188);
 	Fragment fragment243 = FragmentsDatabase.getFragment(FragmentKey.ASN_243);
 	Fragment fragment419 = FragmentsDatabase.getFragment(FragmentKey.ASN_419);
-	fragment188.changeCapacity("N");
-	fragment243.changeCapacity("N");
-	fragment419.changeCapacity("N");
 	simulatorRequest.setFragments(new FragmentList(fragment188, fragment243, fragment419));
 	simulatorRequest.setIncorporationRate(new IncorporationRate(0.5));
 	simulatorRequest.setMinimalIntensity(0.1);
@@ -48,9 +45,8 @@ public class AsnMixA {
 	spectrum = spectrum.merge(spectrum419);
         MassSpectrum continuous = spectrum.simulateContinuousHighRes(120000,
                 100, false);
-
-	//          continuous = continuous.roundMasses(3);
-	MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow("ASN-MIX-A", "ASN-MIX-A", "15N amid + unlabeled, 1:1", continuous, true);
+	
+	MSLineChartApplicationWindow demo = new MSLineChartApplicationWindow("ASN-MIX-B", "ASN-MIX-B", "15N2 13C4 + unlabeled, 1:1", continuous, true);
 	demo.pack();
 	demo.setSize(1300, 750);
 	RefineryUtilities.centerFrameOnScreen(demo);

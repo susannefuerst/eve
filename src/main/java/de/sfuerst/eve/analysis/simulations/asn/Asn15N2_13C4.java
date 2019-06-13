@@ -1,4 +1,4 @@
-package de.sfuerst.eve.analysis.asnstandards.simulations.asn;
+package de.sfuerst.eve.analysis.simulations.asn;
 
 import java.io.IOException;
 
